@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>MY ONLINE SHOP</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <h1 class="display-3 text-center">MY ONLINE STORE</h1>
+    
+      <div class="container col-md-10 mt-5 main " id="form">
+          <label> Enter Product ID</label>
+          <input type="text" name="" id="pid" class="form-control" placeholder="ID...">
+          <label> Enter Product Name</label>
+          <input type="text" name="" id="name" class="form-control" placeholder="NAME...">
+          <label> Enter Product Quantity</label>
+          <input type="text" name ="" id="qty" class="form-control" placeholder="QUANTITY...">
+          <label> Enter Product Price</label>
+          <input type="text" name="" id="price" class="form-control" placeholder="PRICE...">
+          <button class="btn btn-info mt-3" id="btn" onclick="add()" > NEXT PRODUCT</button>
+          <button class="btn btn-info mt-3" id="btn1" onclick="display()" > DISPLAY ITEMS</button>
+        </div>
+   
+        <table class="table container col-lg-10">
+          <th>Product ID</th>
+          <th>Product NAME</th>
+          <th>Product PRICE</th>
+          <th>Product QTY</th>
+          <th>Product TOTAL</th>
+        </table>
+        <div class="container col-lg-10  alert alert-success" id="show" role="alert">
+        <table class="table col-lg-10  ">
+          <td id="sid"></td>
+          <td id="sna"></td>
+          <td id="spr"></td>
+          <td id="sq"></td>
+          <td id="st"></td>
+          <TR>
+            <TD></TD>
+            <TD></TD>
+            <TD></TD>
+            <TD></TD>
+            <TD id="sgt">
+            </TD>
+          </TR>
+        </table></div>
+        </div>
+      <div class="search container col-lg-10">
+        <div class="container h-100">
+          <div class="d-flex justify-content-center h-100">
+            <div class="searchbar">
+              <input class="search_input" type="text" id="sear" placeholder="Search Product By Name....">
+              <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+            </div>
+            <button class="btn btn-success ml-2 mt-4 aa" id="btn2" onclick="search()"> SEARCH DATA</button>
+          </div>
+        </div>
+      </div>
+      <div class="container col-lg-10 mt-3 alert alert-success" id="show" role="alert">
+        <table class="table container col-lg-10">
+          <th>Product ID</th>
+          <th>Product NAME</th>
+          <th>Product PRICE</th>
+          <th>Product QTY</th>
+          <th>Product TOTAL</th>
+        </table>
+        <div class="container col-lg-10  alert alert-success" id="show" role="alert">
+        <table class="table col-lg-10  ">
+          <td id="ssid"></td>
+          <td id="ssna"></td>
+          <td id="sspr"></td>
+          <td id="ssq"></td>
+          <td id="sst"></td>
+      </div>
+        <script>
+            var x= 0;
+            var id = Array(); 
+            var name1 = Array(); 
+            var qty = Array(); 
+            var price = Array(); 
+            var total = Array();
+            var temp = 0;
+          function add(){
+              name1[x] = document.getElementById("name").value; 
+              id[x] = document.getElementById("pid").value; 
+              qty[x] = parseInt(document.getElementById("qty").value); 
+              price[x] = parseInt(document.getElementById("price").value); 
+             x++;
+             document.getElementById("pid").value = "";
+             document.getElementById("name").value = "";
+             document.getElementById("qty").value = "";
+             document.getElementById("price").value = "";
+             
+
+        }   
+        function display(){
+            var a = "<hr/>";   
+            var b = "<hr/>";   
+            var c = "<hr/>";   
+            var d = "<hr/>";   
+            var e = "<hr/>";   
+            var temp = 0;
+            var grandtotal = parseInt(0);
+           
+            for(var i = 0; i<name1.length;i++){
+              total[i] = price[i]*qty[i];
+            }
+            var f = 0;
+            while(f!=name1.length){
+              grandtotal = total[f] + grandtotal;
+              f++;
+            }
+            for (var y=0; y<name1.length; y++)
+            {
+              a += id[y] + "<br>";
+              b += name1[y] + "<br>";
+              c += price[y] + "<br>";
+              d += qty[y] + "<br>";
+              e += total[y] + "<br>";
+            }
+             document.getElementById("sid").innerHTML = a;
+             document.getElementById("sna").innerHTML = b;
+             document.getElementById("spr").innerHTML = c;
+             document.getElementById("sq").innerHTML = d;
+             document.getElementById("st").innerHTML = e;
+             document.getElementById("sgt").innerHTML = "Grand Total is :" +grandtotal;
+            
+               }
+               function search(){
+                 var flag = false;
+                var search = document.getElementById("sear").value;
+                for(var s = 0;s<name1.length;s++){
+                  if(search == name1[s]){
+                    document.getElementById("ssid").innerHTML = id[s];
+                    document.getElementById("ssna").innerHTML = name1[s] ;
+                    document.getElementById("sspr").innerHTML = price[s];
+                    document.getElementById("ssq").innerHTML = qty[s];
+                    document.getElementById("sst").innerHTML = total[s];
+                    flag = True;
+                  }
+                }
+                if(flag == false){
+                  
+                  alert("The Product you searched is not in the list")
+                  
+                }
+                
+               }
+
+        </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
